@@ -3,20 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <properties resource="jdbc.properties" />
+    <typeAliases>
+        <package name="pojo"/>
+    </typeAliases>
+    
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
 
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/ssm?characterEncoding=UTF-8&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value="asd456654."/>
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
 
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mappers/UserMapper.xml"/>
+        <package name="mapper"/>
     </mappers>
 </configuration>
