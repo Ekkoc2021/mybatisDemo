@@ -5,6 +5,15 @@ public class user {
      private String username;
      private String email;
      private String password;
+    public user(){
+
+    }
+    public user(String id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getId() {
         return id;
