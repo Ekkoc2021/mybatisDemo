@@ -9,7 +9,7 @@
             <if test="food.id != null">id=#{food.id} and</if>
             <if test="food.name != null">username=#{food.name} and</if>
             <if test="food.canteen!=null">canteen=#{food.canteen} and</if>
-            <if test="food.floor !=null">password=#{food.floor}</if>
+            <if test="food.floor !=null">floor=#{food.floor}</if>
         </trim>
     </select>
 

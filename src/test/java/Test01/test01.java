@@ -1,5 +1,6 @@
 package Test01;
 
+import mapper.appetiteMapper;
 import mapper.foodListMapper;
 import mapper.userMapper;
 import org.apache.ibatis.io.Resources;
@@ -7,8 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
+import pojo.appetite;
 import pojo.food;
 import pojo.user;
+import sun.awt.windows.WPrinterJob;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -100,7 +103,9 @@ public class test01 {
     public void selectFoodListTest(){
         SqlSession sqlSession=getSession();
         food f=new food();
-//        f.setCanteen("三食堂");
+        f.setCanteen("三食堂");
+        f.setFloor("一楼");
+        System.out.println(f);
         foodListMapper mapper = sqlSession.getMapper(foodListMapper.class);
         List<food> result = mapper.selectFood(f);
         for (food fo:result) {
@@ -130,8 +135,33 @@ public class test01 {
         mapper.deleteFoodById("11111112");
     }
 //    收藏的表CRUD----------------
-    public void insertAppetiteByUserIdTest(){
-
+    @Test
+//   添加收藏
+    public void insertAppetiteTest(){
+        SqlSession session=getSession();
+        appetiteMapper mapper = session.getMapper(appetiteMapper.class);
+        mapper.insertAppetite(new appetite("0000000001","1111111111"));
     }
+//    查询收藏
+    @Test
+    public void selectAppetiteTest(){
+        SqlSession session = getSession();
+        appetiteMapper mapper =  session.getMapper(appetiteMapper.class);
+        appetite a1=new appetite();
+//        a1.setUserId("0000000001");
+        List<appetite> l=mapper.selectAppetite(a1);
+        for (appetite a:l) {
+            System.out.println(a);
+        }
+    }
+//    取消收藏
+    @Test
+    public void deleteAppetiteTest(){
+        SqlSession sqlSession=getSession();
+        appetiteMapper mapper = sqlSession.getMapper(appetiteMapper.class);
+        appetite a=new appetite("0000000001","1111111111");
+        mapper.deleteAppetite(a);
+    }
+//
 }
 

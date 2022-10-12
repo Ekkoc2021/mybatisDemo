@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.appetiteMapper">
+    <!--    void insertAppetite(@Param("userid")String userid,@Param("foodid")String foodid);-->
+    <insert id="insertAppetite">
+        insert into appetite value (#{appetite.foodId},#{appetite.userId});
+    </insert>
+    <!--    void deleteAppetite(@Param("userid")String userid,@Param("foodid")String foodid);-->
+    <delete id="deleteAppetite">
+        delete from appetite
+        <trim suffixOverrides="and" prefix="where">
+            <if test="appetite.userId !=null">
+                user_id=#{appetite.userId} and
+            </if >
+            <if test="appetite.foodId !=null">
+                food_id=#{appetite.foodId}
+            </if>
+        </trim>;
+    </delete>
+
+<!--    void selectAppetite(@Param("appetite") appetite a);-->
+    <select id="selectAppetite" resultType="appetite">
+        select * from appetite
+        <trim suffixOverrides="and" prefix="where">
+            <if test="appetite.userId!=null">
+                user_id=#{appetite.userId} and
+            </if>
+            <if test="appetite.foodId !=null">
+                food_id=#{appetite.foodId}
+            </if>
+        </trim>;
+    </select>
+</mapper>
